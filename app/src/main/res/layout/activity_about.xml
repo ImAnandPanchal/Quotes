@@ -18,9 +18,8 @@
         android:layout_below="@+id/name"
         android:layout_margin="30dp"
         android:textSize="15dp"
-        android:text="       - This App Developed For Specific user
-      to think about new QUOTES than write
-      on this application."
+        android:layout_centerHorizontal="true"
+        android:text=" - This App Developed For Specific user to\nthink about new QUOTES than write on this\napplication."
         android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -30,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Developed by : \n      - Anand Panchal
-      - Nirav Patel"
+        android:text="Developed by :\n   - Anand Panchal\n   - Nirav Patel"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

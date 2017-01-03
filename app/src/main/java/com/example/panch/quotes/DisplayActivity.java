@@ -393,11 +393,7 @@ public class DisplayActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_about)
         {
-            try {
-                InputStream inputStream=getApplicationContext().getAssets().open("about.xml");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            startActivity(new Intent(getApplicationContext(),About.class));
         }
         else if(id == R.id.nav_logout)
         {

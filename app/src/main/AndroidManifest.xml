@@ -25,7 +25,8 @@
         <activity android:name=".newPost" />
         <activity android:name=".DisplayPost" />
         <activity android:name=".ReSendVerificationLink" />
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>

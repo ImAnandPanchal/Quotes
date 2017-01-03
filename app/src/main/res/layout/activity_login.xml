@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#F5F5F5"
+    tools:context="com.example.panch.quotes.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEmail"
+            android:hint="Email ID"
+            android:layout_marginBottom="10dp"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPassword"
+            android:hint="Password"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/txtEmail"
+            android:inputType="textPassword" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLogin"
+            android:text="Login"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/txtPassword"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="New User?"
+            android:textSize="17dp"
+            android:id="@+id/tvRegister"
+            android:layout_below="@+id/btnLogin"
+            android:gravity="center"
+            android:clickable="true"/>
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_below="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Forgot Password?"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tvRe_send_verification_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Re-Send Verification Link?"
+            android:visibility="invisible"
+            android:clickable="true"
+            android:layout_below="@+id/tvForgotPassword"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="#212121"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skip >"
+            android:background="#212121"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:id="@+id/btnSkip"
+            android:gravity="center"/>
+    </RelativeLayout>
+</RelativeLayout>

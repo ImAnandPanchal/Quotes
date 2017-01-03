@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@mipmap/ic_account_circle_black_24dp"
+            android:title="Logout" />
+
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@mipmap/ic_import_contacts_black_24dp"
+            android:title="All"></item>
+    </group>
+
+    <item android:title="Category">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_attitude"
+                android:title="             Attitude" />
+            <item
+                android:id="@+id/nav_flirt"
+                android:title="             Flirt" />
+            <item
+                android:id="@+id/nav_friendship"
+                android:title="             Friendship" />
+            <item
+                android:id="@+id/nav_funny"
+                android:title="             Funny" />
+            <item
+                android:id="@+id/nav_inspirational"
+                android:title="             Inspirational" />
+            <item
+                android:id="@+id/nav_love"
+                android:title="             Love" />
+            <item
+                android:id="@+id/nav_sad"
+                android:title="             Sad" />
+            <item
+                android:id="@+id/nav_shayari"
+                android:title="             Shayari" />
+            <item
+                android:id="@+id/nav_truthful_words"
+                android:title="             Truthful Words" />
+            <item
+                android:id="@+id/nav_well_said"
+                android:title="             Well Said" />
+            </group>
+        </menu>
+
+    </item>
+
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_about"
+            android:icon="@mipmap/ic_font_download_black_24dp"
+            android:title="About"></item>
+    </group>
+
+</menu>

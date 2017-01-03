@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Quotes</string>
+    <string name="title_activity_display">DisplayActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="about">A &amp; N\nDeveloper</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="Interstitial_ads">ca-app-pub-5496466424105479/3041618947</string>
+    <string name="Banner_ads">ca-app-pub-5496466424105479/5563583347</string>
+    <string name="Banner_ads_2">ca-app-pub-5496466424105479/9993782944</string>
+    <string name="Banner_ads_3">ca-app-pub-5496466424105479/5612662141</string>
+
+    <string-array name="cat_array">
+        <item id="0">Select Message Category</item>
+        <item id="1">Attitude</item>
+        <item id="2">Flirt</item>
+        <item id="3">Friendship</item>
+        <item id="4">Funny</item>
+        <item id="5">Inspirational</item>
+        <item id="6">Love</item>
+        <item id="7">Sad</item>
+        <item id="8">Shayari</item>
+        <item id="9">Truthful Words</item>
+        <item id="10">Well Said</item>
+    </string-array>
+
+</resources>

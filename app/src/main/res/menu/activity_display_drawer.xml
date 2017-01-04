@@ -57,6 +57,9 @@
         <item android:id="@+id/nav_about"
             android:icon="@mipmap/ic_font_download_black_24dp"
             android:title="About"></item>
+        <item android:id="@+id/nav_feedback"
+            android:icon="@mipmap/ic_feedback_black_24dp"
+            android:title="Feedback"></item>
     </group>
 
 </menu>

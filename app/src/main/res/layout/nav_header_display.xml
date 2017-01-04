@@ -22,9 +22,10 @@
 
 
     <TextView
+        android:paddingTop="10dp"
         android:id="@+id/txt_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:text="Quotes@android.com" />
 
 </LinearLayout>

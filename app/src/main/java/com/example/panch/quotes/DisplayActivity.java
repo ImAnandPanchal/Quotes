@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -49,6 +50,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class DisplayActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +73,11 @@ public class DisplayActivity extends AppCompatActivity
     private int pageCount=1;
     int cat=0;
     private int login_status=0;
+    private Timer myTimer;
+    private AdRequest adRequest;
+
+    private android.os.Handler handler=new android.os.Handler();
+
 
     private static final String get_data_url="http://anandpanchal.cu.cc/Quotes_Application/cat_data.php?page=";
     //private static final String get_data_url="http://192.168.0.105/Quotes_Application/cat_data.php?page=";
@@ -119,7 +129,7 @@ public class DisplayActivity extends AppCompatActivity
 
         //MobileAds.initialize(getApplicationContext(),"ca-app-pub-5496466424105479~4086850148");
         AdView adView=(AdView)findViewById(R.id.ad1);
-        AdRequest adRequest=new AdRequest.Builder()
+        adRequest=new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 //.addTestDevice("9149FA4061BD71C20CEAEA62DA2E5A4D")
                 .build();
@@ -127,7 +137,15 @@ public class DisplayActivity extends AppCompatActivity
 
         interstitialAd =new InterstitialAd(DisplayActivity.this);
         interstitialAd.setAdUnitId(getString(R.string.Interstitial_ads));
-        interstitialAd.loadAd(adRequest);
+        //interstitialAd.loadAd(adRequest);
+
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                interstitialAd.loadAd(adRequest);
+            }
+        },30000);
 
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -391,6 +409,10 @@ public class DisplayActivity extends AppCompatActivity
             loadRecyclerViewData(cat);
 
         }
+        else if(id == R.id.nav_feedback)
+        {
+
+        }
         else if(id == R.id.nav_about)
         {
             startActivity(new Intent(getApplicationContext(),About.class));
@@ -467,4 +489,14 @@ public class DisplayActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onResume() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                interstitialAd.loadAd(adRequest);
+            }
+        },300000);
+        super.onResume();
+    }
 }

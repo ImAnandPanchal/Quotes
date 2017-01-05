@@ -59,6 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter email",Toast.LENGTH_LONG).show();
                     return;
                 }
+                if(!edEmail.getText().toString().matches(login_config.validation_email))
+                {
+                    Toast.makeText(getApplicationContext(), "Enter valid Email ID", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if(password.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(),"Enter password",Toast.LENGTH_LONG).show();

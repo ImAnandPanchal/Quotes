@@ -12,6 +12,8 @@ public class login_config {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
 
+    public static final String validation_email="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     //If server response is equal to this that means login is successful
     public static final String LOGIN_SUCCESS = "success";

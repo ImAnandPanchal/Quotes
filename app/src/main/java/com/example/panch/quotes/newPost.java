@@ -67,6 +67,7 @@ public class newPost extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter Message..",Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 //Toast.makeText(getApplicationContext(),String.valueOf(spinner.getSelectedItemId()),Toast.LENGTH_LONG).show();
                 if(spinner.getSelectedItemId()==0)
                 {

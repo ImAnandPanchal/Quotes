@@ -18,8 +18,9 @@
         android:layout_below="@+id/name"
         android:layout_margin="30dp"
         android:textSize="15dp"
+        android:textAlignment="gravity"
         android:layout_centerHorizontal="true"
-        android:text=" - This App Developed For Specific user to\nthink about new QUOTES than write on this\napplication."
+        android:text=" - This App Developed For Specific user to think about new QUOTES than write on this application."
         android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

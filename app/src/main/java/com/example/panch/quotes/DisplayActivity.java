@@ -411,7 +411,7 @@ public class DisplayActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_feedback)
         {
-
+            startActivity(new Intent(getApplicationContext(),FeedBack.class));
         }
         else if(id == R.id.nav_about)
         {
@@ -472,6 +472,7 @@ public class DisplayActivity extends AppCompatActivity
                             //Starting login activity
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(intent);
+                            finishAffinity();
                         }
                     });
 

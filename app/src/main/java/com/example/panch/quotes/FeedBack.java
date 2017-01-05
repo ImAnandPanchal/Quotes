@@ -21,68 +21,83 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReSendVerificationLink extends AppCompatActivity {
+public class FeedBack extends AppCompatActivity {
 
-    private  EditText edEmail;
-    private Button btn_Re_Send;
+    Button btnSubmit;
+    EditText edEmail,edTitle,edMsg;
 
-    private final String send_url="http://anandpanchal.cu.cc/Quotes_Application/re_send_verification_link.php";
+    private String feed_url="http://anandpanchal.cu.cc/Quotes_Application/feedback.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_re_send_verification_link);
+        setContentView(R.layout.activity_feed_back);
 
-        edEmail=(EditText)findViewById(R.id.txtEmail);
-        btn_Re_Send=(Button)findViewById(R.id.btn_send);
+        btnSubmit=(Button)findViewById(R.id.btnSubmit);
+        edEmail=(EditText)findViewById(R.id.txtFemail);
+        edTitle=(EditText)findViewById(R.id.txtTitle);
+        edMsg=(EditText)findViewById(R.id.txtFeedBack);
 
-        btn_Re_Send.setOnClickListener(new View.OnClickListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(edEmail.getText()))
-                {
-                    Toast.makeText(getApplicationContext(),"Enter email",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(edEmail.getText())) {
+                    Toast.makeText(getApplicationContext(), "Enter Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 if(!edEmail.getText().toString().matches(login_config.validation_email))
                 {
                     Toast.makeText(getApplicationContext(), "Enter valid Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                final ProgressDialog progressDialog=ProgressDialog.show(ReSendVerificationLink.this,"Send","Please wait...",false,false);
+                if (TextUtils.isEmpty(edTitle.getText())) {
+                    Toast.makeText(getApplicationContext(), "Enter Title", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-                StringRequest stringRequest=new StringRequest(Request.Method.POST, send_url,
+                if (TextUtils.isEmpty(edMsg.getText())) {
+                    Toast.makeText(getApplicationContext(), "Enter Your Feedback Message", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                final ProgressDialog progressDialog = ProgressDialog.show(FeedBack.this, "Submitting", "Please wait...", false, false);
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, feed_url ,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
+
                                 if(response.equalsIgnoreCase("success"))
                                 {
-                                    //Toast.makeText(getApplicationContext(),"",Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                                    Toast.makeText(getApplicationContext(),"Thank You For Feedback",Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(),DisplayActivity.class));
                                     finishAffinity();
                                 }
                                 else
                                 {
-                                    Toast.makeText(getApplicationContext(),"Check your email id",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),"Feedback not submitted",Toast.LENGTH_LONG).show();
                                 }
-
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-
                             }
-                        }){
+                        }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
 
-                        Map<String, String> params =new HashMap<String, String>();
+                        Map<String, String> params = new HashMap<String, String>();
 
-                        params.put("email",edEmail.getText().toString());
+                        params.put("email", edEmail.getText().toString());
+                        params.put("title", edTitle.getText().toString());
+                        params.put("msg", edMsg.getText().toString());
+
+
                         return params;
 
                     }

@@ -24,22 +24,22 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText edEmail,edPass,edRePass;
+    EditText edEmail, edPass, edRePass;
     Button btnReg;
-    final String reg_url="http://anandpanchal.cu.cc/Quotes_Application/register.php";
+    final String reg_url = "http://anandpanchal.cu.cc/Quotes_Application/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        edEmail=(EditText)findViewById(R.id.txtEmail);
-        edPass=(EditText)findViewById(R.id.txtPassword);
-        btnReg=(Button)findViewById(R.id.btnRegister);
-        edRePass=(EditText)findViewById(R.id.txtRePassword);
+        edEmail = (EditText) findViewById(R.id.txtEmail);
+        edPass = (EditText) findViewById(R.id.txtPassword);
+        btnReg = (Button) findViewById(R.id.btnRegister);
+        edRePass = (EditText) findViewById(R.id.txtRePassword);
 
-        AdView adView=(AdView)findViewById(R.id.ad1);
-        AdRequest adRequest=new AdRequest.Builder()
+        AdView adView = (AdView) findViewById(R.id.ad1);
+        AdRequest adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 //.addTestDevice("9149FA4061BD71C20CEAEA62DA2E5A4D")
                 .build();
@@ -50,42 +50,36 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String email=edEmail.getText().toString().trim();
-                final String password=edPass.getText().toString().trim();
-                final String Re_password=edRePass.getText().toString().trim();
+                final String email = edEmail.getText().toString().trim();
+                final String password = edPass.getText().toString().trim();
+                final String Re_password = edRePass.getText().toString().trim();
 
-                if(email.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(),"Enter email",Toast.LENGTH_LONG).show();
+                if (email.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter email", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(!edEmail.getText().toString().matches(login_config.validation_email))
-                {
+                if (!edEmail.getText().toString().matches(login_config.validation_email)) {
                     Toast.makeText(getApplicationContext(), "Enter valid Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(password.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(),"Enter password",Toast.LENGTH_LONG).show();
+                if (password.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                final ProgressDialog progressDialog=ProgressDialog.show(RegisterActivity.this,"Registration","Please wait...",false,false);
+                final ProgressDialog progressDialog = ProgressDialog.show(RegisterActivity.this, "Registration", "Please wait...", false, false);
 
-                StringRequest stringRequest=new StringRequest(Request.Method.POST, reg_url,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, reg_url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
-                                if(response.equalsIgnoreCase("success"))
-                                {
-                                    Toast.makeText(getApplicationContext(),"Verification link is send on email",Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                                if (response.equalsIgnoreCase("success")) {
+                                    Toast.makeText(getApplicationContext(), "Verification link is send on email", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                                     finishAffinity();
-                                }
-                                else
-                                {
-                                    Toast.makeText(getApplicationContext(),"Already register with this email",Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Already register with this email", Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -94,25 +88,27 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), error.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                             }
-                        }){
+                        }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
 
-                        Map<String, String> params =new HashMap<String, String>();
+                        Map<String, String> params = new HashMap<String, String>();
 
-                        params.put("email",email);
-                        params.put("password",password);
+                        params.put("email", email);
+                        params.put("password", password);
 
                         return params;
 
                     }
                 };
 
-                RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 requestQueue.add(stringRequest);
-                };
+            }
+
+            ;
         });
     }
 }

@@ -24,19 +24,19 @@ import java.util.Map;
 public class FeedBack extends AppCompatActivity {
 
     Button btnSubmit;
-    EditText edEmail,edTitle,edMsg;
+    EditText edEmail, edTitle, edMsg;
 
-    private String feed_url="http://anandpanchal.cu.cc/Quotes_Application/feedback.php";
+    private String feed_url = "http://anandpanchal.cu.cc/Quotes_Application/feedback.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
 
-        btnSubmit=(Button)findViewById(R.id.btnSubmit);
-        edEmail=(EditText)findViewById(R.id.txtFemail);
-        edTitle=(EditText)findViewById(R.id.txtTitle);
-        edMsg=(EditText)findViewById(R.id.txtFeedBack);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        edEmail = (EditText) findViewById(R.id.txtFemail);
+        edTitle = (EditText) findViewById(R.id.txtTitle);
+        edMsg = (EditText) findViewById(R.id.txtFeedBack);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +46,7 @@ public class FeedBack extends AppCompatActivity {
                     return;
                 }
 
-                if(!edEmail.getText().toString().matches(login_config.validation_email))
-                {
+                if (!edEmail.getText().toString().matches(login_config.validation_email)) {
                     Toast.makeText(getApplicationContext(), "Enter valid Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -64,21 +63,18 @@ public class FeedBack extends AppCompatActivity {
 
                 final ProgressDialog progressDialog = ProgressDialog.show(FeedBack.this, "Submitting", "Please wait...", false, false);
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, feed_url ,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, feed_url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
 
-                                if(response.equalsIgnoreCase("success"))
-                                {
-                                    Toast.makeText(getApplicationContext(),"Thank You For Feedback",Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(getApplicationContext(),DisplayActivity.class));
+                                if (response.equalsIgnoreCase("success")) {
+                                    Toast.makeText(getApplicationContext(), "Thank You For Feedback", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), DisplayActivity.class));
                                     finishAffinity();
-                                }
-                                else
-                                {
-                                    Toast.makeText(getApplicationContext(),"Feedback not submitted",Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Feedback not submitted", Toast.LENGTH_LONG).show();
                                 }
                             }
                         },
@@ -102,7 +98,7 @@ public class FeedBack extends AppCompatActivity {
 
                     }
                 };
-                RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 requestQueue.add(stringRequest);
             }
         });

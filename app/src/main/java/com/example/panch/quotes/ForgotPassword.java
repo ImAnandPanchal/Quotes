@@ -26,15 +26,15 @@ public class ForgotPassword extends AppCompatActivity {
     EditText edEmail;
     Button btnSubmit;
 
-    private String forgot_url="http://anandpanchal.cu.cc/Quotes_Application/forgot_password.php";
+    private String forgot_url = "http://anandpanchal.cu.cc/Quotes_Application/forgot_password.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        btnSubmit=(Button)findViewById(R.id.btnFsubmit);
-        edEmail = (EditText)findViewById(R.id.fEmail);
+        btnSubmit = (Button) findViewById(R.id.btnFsubmit);
+        edEmail = (EditText) findViewById(R.id.fEmail);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,29 +43,25 @@ public class ForgotPassword extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Enter Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(!edEmail.getText().toString().matches(login_config.validation_email))
-                {
+                if (!edEmail.getText().toString().matches(login_config.validation_email)) {
                     Toast.makeText(getApplicationContext(), "Enter valid Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 final ProgressDialog progressDialog = ProgressDialog.show(ForgotPassword.this, "Submitting", "Please wait...", false, false);
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, forgot_url ,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, forgot_url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
 
-                                if(response.equalsIgnoreCase("success"))
-                                {
-                                    Toast.makeText(getApplicationContext(),"Email has been sent",Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                                if (response.equalsIgnoreCase("success")) {
+                                    Toast.makeText(getApplicationContext(), "Email has been sent", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                                     finishAffinity();
-                                }
-                                else
-                                {
-                                    Toast.makeText(getApplicationContext(),"Email ID is not valid",Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Email ID is not valid", Toast.LENGTH_LONG).show();
                                 }
                             }
                         },
@@ -84,7 +80,7 @@ public class ForgotPassword extends AppCompatActivity {
 
                     }
                 };
-                RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 requestQueue.add(stringRequest);
             }
         });

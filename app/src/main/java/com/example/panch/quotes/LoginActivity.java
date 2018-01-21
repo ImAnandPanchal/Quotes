@@ -26,11 +26,11 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btnLogin,btnSkip;
-    private TextView tvRegister,tvReSendVerificationLink,tvForgotPassword;
-    private EditText txtEmail,txtPassword;
+    private Button btnLogin, btnSkip;
+    private TextView tvRegister, tvReSendVerificationLink, tvForgotPassword;
+    private EditText txtEmail, txtPassword;
 
-    private boolean loggedIn=false;
+    private boolean loggedIn = false;
 
 
     @Override
@@ -38,68 +38,59 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        tvRegister = (TextView)findViewById(R.id.tvRegister);
-        txtEmail = (EditText)findViewById(R.id.txtEmail);
-        txtPassword = (EditText)findViewById(R.id.txtPassword);
-        btnLogin = (Button)findViewById(R.id.btnLogin);
-        btnSkip = (Button)findViewById(R.id.btnSkip);
-        tvReSendVerificationLink=(TextView) findViewById(R.id.tvRe_send_verification_link);
-        tvForgotPassword=(TextView)findViewById(R.id.tvForgotPassword);
+        tvRegister = (TextView) findViewById(R.id.tvRegister);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnSkip = (Button) findViewById(R.id.btnSkip);
+        tvReSendVerificationLink = (TextView) findViewById(R.id.tvRe_send_verification_link);
+        tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
+                final String email = txtEmail.getText().toString().trim();
+                final String password = txtPassword.getText().toString().trim();
 
-                final String email=txtEmail.getText().toString().trim();
-                final String password=txtPassword.getText().toString().trim();
-
-                if(email.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(),"Enter email",Toast.LENGTH_LONG).show();
+                if (email.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter email", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(!email.matches(login_config.validation_email))
-                {
+                if (!email.matches(login_config.validation_email)) {
                     Toast.makeText(getApplicationContext(), "Enter valid Email ID", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(password.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(),"Enter password",Toast.LENGTH_LONG).show();
+                if (password.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                final ProgressDialog progressDialog=ProgressDialog.show(LoginActivity.this,"Login","Please wait...",false,false);
+                final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Login", "Please wait...", false, false);
 
-                StringRequest stringRequest=new StringRequest(Request.Method.POST, login_config.LOGIN_URL,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, login_config.LOGIN_URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
-                                if(response.equalsIgnoreCase(login_config.LOGIN_SUCCESS))
-                                {
-                                    SharedPreferences sharedPreferences= LoginActivity.this.getSharedPreferences(login_config.SHARED_PREF_NAME,Context.MODE_PRIVATE);
+                                if (response.equalsIgnoreCase(login_config.LOGIN_SUCCESS)) {
+                                    SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(login_config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
-                                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                                    editor.putBoolean(login_config.LOGGEDIN_SHARED_PREF,true);
-                                    editor.putString(login_config.EMAIL_SHARED_PREF,email);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putBoolean(login_config.LOGGEDIN_SHARED_PREF, true);
+                                    editor.putString(login_config.EMAIL_SHARED_PREF, email);
 
                                     editor.commit();
 
-                                    startActivity(new Intent(getApplicationContext(),DisplayActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), DisplayActivity.class));
                                     finishAffinity();
-                                }
-                                else
-                                {
-                                    if(response.equalsIgnoreCase("wrong")) {
+                                } else {
+                                    if (response.equalsIgnoreCase("wrong")) {
                                         Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
 
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(getApplicationContext(),"Your Email ID not Verified..",Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Your Email ID not Verified..", Toast.LENGTH_LONG).show();
                                         tvReSendVerificationLink.setVisibility(View.VISIBLE);
                                     }
                                 }
@@ -109,23 +100,23 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), error.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                             }
-                        }){
+                        }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
 
-                        Map<String, String> params =new HashMap<String, String>();
+                        Map<String, String> params = new HashMap<String, String>();
 
-                        params.put(login_config.KEY_EMAIL,email);
-                        params.put(login_config.KEY_PASSWORD,password);
+                        params.put(login_config.KEY_EMAIL, email);
+                        params.put(login_config.KEY_PASSWORD, password);
 
                         return params;
 
                     }
                 };
 
-                RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 requestQueue.add(stringRequest);
             }
         });
@@ -134,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(),DisplayActivity.class));
+                startActivity(new Intent(getApplicationContext(), DisplayActivity.class));
                 finishAffinity();
             }
         });
@@ -143,21 +134,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
         });
 
         tvReSendVerificationLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ReSendVerificationLink.class));
+                startActivity(new Intent(getApplicationContext(), ReSendVerificationLink.class));
             }
         });
 
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
+                startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
             }
         });
     }
@@ -166,13 +157,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences sharedPreferences=getSharedPreferences(login_config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(login_config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
-        loggedIn =sharedPreferences.getBoolean(login_config.LOGGEDIN_SHARED_PREF,false);
+        loggedIn = sharedPreferences.getBoolean(login_config.LOGGEDIN_SHARED_PREF, false);
 
-        if(loggedIn)
-        {
-            startActivity(new Intent(getApplicationContext(),DisplayActivity.class));
+        if (loggedIn) {
+            startActivity(new Intent(getApplicationContext(), DisplayActivity.class));
         }
     }
 
